@@ -1,120 +1,240 @@
 # 🤝 Profile-Based Matching System
 
-> Intelligent Hybrid Recommendation System using NLP, TF-IDF, Cosine Similarity, MBTI Compatibility, Location Matching and Adaptive Feedback Learning.
+### Intelligent Hybrid Recommendation System using NLP, TF-IDF, Cosine Similarity, MBTI Compatibility, Location Matching and Adaptive Feedback Learning
 
-## 👨‍💻 Student
+<p align="center">
+  <b>Machine Learning Major Project 1</b><br>
+  Artificial Intelligence & Machine Learning
+</p>
 
-**Suzain Mudabbir Sayyad**  
-Artificial Intelligence & Machine Learning Student  
-Domain: Machine Learning
+---
+
+## 👨‍🎓 Student Information
+
+| Field | Details |
+|---|---|
+| **Student** | Suzain Mudabbir Sayyad |
+| **University** | Sanjay Ghodawat University, Kolhapur |
+| **Domain** | Artificial Intelligence & Machine Learning |
+| **Project Type** | Machine Learning Major Project |
+| **System Type** | Hybrid Recommendation System |
 
 ---
 
 ## 📌 Project Overview
 
-This project implements a profile-based recommendation system that calculates compatibility between users using a combination of unstructured profile text, MBTI personality compatibility and location matching.
+The **Profile-Based Matching System** is an intelligent recommendation system that calculates compatibility between user profiles using a combination of:
 
-The system follows a hybrid recommendation approach. Textual information from user profiles is processed using NLP and represented using TF-IDF vectors. Cosine Similarity is then used to measure textual similarity. MBTI and location compatibility are calculated separately and combined with text similarity to produce an overall compatibility score.
+- 🧠 Natural Language Processing (NLP)
+- 🔢 TF-IDF vectorization
+- 📐 Cosine similarity
+- 🧩 MBTI personality compatibility
+- 📍 Location compatibility
+- 🔄 Adaptive feedback learning
+- 🤖 Logistic Regression
+- 🌐 Streamlit
 
-The project also includes an adaptive feedback component. Accept/Reject feedback is used with Logistic Regression to learn updated matching weights and generate adaptive recommendations.
+Instead of relying only on fixed filters or keyword matching, the system combines profile text similarity with personality and location compatibility to generate a **Top-5 recommendation list**.
+
+The system also includes an adaptive feedback component where **Accept/Reject** interactions are used to learn updated matching weights.
+
+---
 
 ## 🎯 Problem Statement
 
 The system is designed to:
 
 1. Parse unstructured profile information using NLP.
-2. Quantify similarity between user profiles.
+2. Quantify semantic similarity between user profiles.
 3. Combine text similarity, MBTI compatibility and location compatibility.
-4. Generate the Top 5 recommended profiles.
-5. Learn from Accept/Reject feedback and update matching weights.
+4. Generate the Top-5 compatible profiles.
+5. Learn from Accept/Reject feedback.
+6. Update matching weights for adaptive recommendations.
 
-## 🔄 Complete Workflow
+---
+
+## 🎯 Project Objectives
+
+- Convert unstructured profile information into machine-readable features.
+- Measure semantic similarity between users.
+- Include personality compatibility in the recommendation process.
+- Include location as an additional compatibility factor.
+- Produce ranked Top-5 recommendations.
+- Introduce feedback-based adaptive learning.
+- Provide an interactive Streamlit interface for the matching system.
+
+---
+
+## 🔄 Complete System Workflow
 
 ```text
 User Profiles
-      ↓
+     │
+     ▼
 Data Generation / Loading
-      ↓
-Data Inspection
-      ↓
+     │
+     ▼
 Text Preprocessing
-      ↓
+     │
+     ├── Lowercase
+     ├── Remove Punctuation
+     ├── Remove Stop Words
+     └── Lemmatization
+     │
+     ▼
 Combined Profile Text
-      ↓
+     │
+     ▼
 TF-IDF Vectorization
-      ↓
+     │
+     ▼
 Cosine Similarity
-      ↓
-MBTI Compatibility
-      ↓
-Location Compatibility
-      ↓
-Hybrid Compatibility Score
-      ↓
-Top 5 Recommendations
-      ↓
-Accept / Reject Feedback
-      ↓
-Logistic Regression
-      ↓
-Adaptive Matching Weights
-      ↓
-Adaptive Recommendations
-      ↓
-Streamlit Application
+     │
+     ├───────────────┐
+     ▼               ▼
+MBTI Compatibility  Location Compatibility
+     │               │
+     └───────┬───────┘
+             ▼
+      Hybrid Compatibility Score
+             │
+             ▼
+       Top-5 Recommendations
+             │
+             ▼
+       Accept / Reject Feedback
+             │
+             ▼
+      Logistic Regression
+             │
+             ▼
+     Adaptive Matching Weights
+             │
+             ▼
+    Adaptive Recommendations
+             │
+             ▼
+      Streamlit Application
 ```
 
-## 🧠 Matching Components
+---
 
-### 1. NLP Text Similarity
+## 📊 Dataset
 
-The project combines:
+The notebook generates **200 synthetic user profiles**.
 
-- About Me
-- Professional Summary
-- Skills
-- Interests
+Each profile contains:
 
-into a single profile text representation.
+| Field | Description |
+|---|---|
+| `User_ID` | Unique user identifier |
+| `Name` | User name |
+| `About_Me` | Personal profile description |
+| `Professional_Summary` | Professional background |
+| `Skills` | Technical/professional skills |
+| `Professional_Goal` | Career or professional objective |
+| `Interests` | User interests |
+| `MBTI` | MBTI personality type |
+| `Location` | User location |
 
-The text is cleaned before being converted into numerical features.
+> **Note:** The project uses synthetic profiles rather than real personal-user data.
 
-### 2. TF-IDF
+---
 
-TF-IDF converts profile text into numerical vectors and gives importance to words based on their frequency within profiles and across the collection.
+## 🧹 1. Text Preprocessing
 
-### 3. Cosine Similarity
+The system preprocesses profile text before calculating similarity.
 
-Cosine Similarity measures the similarity between the TF-IDF representations of two profiles.
-
-### 4. MBTI Compatibility
-
-The system uses MBTI personality types as an additional compatibility component.
-
-The notebook represents MBTI compatibility on a 0–1 scale:
-
-- `1.0` → high compatibility
-- `0.5` → moderate compatibility
-- `0.0` → low compatibility
-
-### 5. Location Compatibility
-
-The current project implementation assigns:
-
-- `1.0` when locations match
-- `0.0` when locations differ
-
-### 6. Hybrid Compatibility Score
-
-The initial notebook weights are:
+The preprocessing pipeline includes:
 
 ```text
-Text Similarity       = 60%
-MBTI Compatibility    = 25%
-Location Compatibility = 15%
+Raw Profile Text
+       ↓
+Convert to Lowercase
+       ↓
+Remove Punctuation / Special Characters
+       ↓
+Tokenization
+       ↓
+Remove English Stop Words
+       ↓
+Lemmatization
+       ↓
+Clean Profile Text
 ```
 
-The initial score is:
+The implementation uses **NLTK** for stop-word removal and lemmatization.
+
+---
+
+## 🔢 2. TF-IDF Vectorization
+
+The cleaned profile text is converted into numerical vectors using **TF-IDF**.
+
+```python
+TfidfVectorizer()
+```
+
+TF-IDF gives importance to words based on their frequency within profiles and across the complete collection.
+
+The result is a numerical representation of each profile that can be compared mathematically.
+
+---
+
+## 📐 3. Cosine Similarity
+
+Cosine similarity is used to measure semantic similarity between profile vectors.
+
+```python
+cosine_similarity(tfidf_matrix)
+```
+
+A higher similarity value indicates that the profile texts are more similar according to the TF-IDF representation.
+
+The resulting similarity matrix is used as the main text-based compatibility component.
+
+---
+
+## 🧩 4. MBTI Compatibility
+
+The system adds personality compatibility using MBTI types.
+
+Compatibility is represented on a **0–1 scale**:
+
+| Score | Meaning |
+|---:|---|
+| `1.0` | High compatibility |
+| `0.5` | Moderate compatibility |
+| `0.0` | Low compatibility |
+
+The compatibility values are based on the predefined MBTI compatibility rules implemented in the notebook.
+
+---
+
+## 📍 5. Location Compatibility
+
+Location is included as an additional compatibility signal.
+
+```text
+Same Location      → 1.0
+Different Location → 0.0
+```
+
+This allows the recommendation score to consider geographical compatibility alongside profile similarity and personality.
+
+---
+
+## ⚙️ 6. Hybrid Compatibility Score
+
+The initial matching model uses three components.
+
+| Component | Initial Weight |
+|---|---:|
+| **Text Similarity** | **60%** |
+| **MBTI Compatibility** | **25%** |
+| **Location Compatibility** | **15%** |
+
+### Formula
 
 ```text
 Compatibility Score =
@@ -123,149 +243,155 @@ Compatibility Score =
   + (Location Compatibility × 0.15)
 ```
 
-After feedback learning, the adaptive weights are used instead of only the initial fixed weights.
+The candidates are sorted by the final compatibility score and the **Top 5** profiles are returned.
 
-## 🔁 Adaptive Learning
+---
 
-The notebook simulates **500 Accept/Reject feedback interactions**.
+## 🔄 7. Adaptive Feedback Learning
+
+The system extends the initial fixed-weight model with adaptive learning.
 
 Feedback is represented as:
 
 ```text
-1 → Accept
-0 → Reject
+Accept → 1
+Reject → 0
 ```
 
-Logistic Regression uses:
+The notebook uses simulated feedback interactions and trains a **Logistic Regression** model using:
 
-- Text Similarity
-- MBTI Score
-- Location Score
+```text
+Text Similarity
+MBTI Score
+Location Score
+```
 
-as input features and Feedback as the target.
+as input features.
 
-The learned coefficients are normalized into updated weights. These weights are then used by the adaptive recommendation function.
+The learned coefficients are normalized to produce updated adaptive weights.
 
-## 👥 Dataset
+### Adaptive Process
 
-The notebook generates **200 synthetic user profiles**.
+```text
+Initial Recommendations
+          ↓
+     User Feedback
+     Accept / Reject
+          ↓
+   Feedback Dataset
+          ↓
+   Logistic Regression
+          ↓
+   Learned Coefficients
+          ↓
+   Adaptive Weights
+          ↓
+Adaptive Recommendations
+```
 
-Each profile includes:
+---
 
-- User ID
-- Name
-- About Me
-- Professional Summary
-- Skills
-- Professional Goal
-- Interests
-- MBTI Personality Type
-- Location
+## 🏆 8. Top-5 Recommendation Process
 
-The project uses synthetic profile data generated within the notebook.
+For each selected user:
 
-## 🏆 Recommendation Output
-
-For a selected user, the system:
-
-1. Compares the user with other profiles.
-2. Calculates compatibility components.
-3. Calculates the final compatibility score.
-4. Sorts candidates by score.
-5. Returns the Top 5 profiles.
+1. Calculate text similarity with other profiles.
+2. Calculate MBTI compatibility.
+3. Calculate location compatibility.
+4. Apply the adaptive matching weights.
+5. Calculate the final compatibility score.
+6. Sort profiles by score.
+7. Exclude the selected user.
+8. Return the Top 5 profiles.
 
 The recommendation output includes:
 
-- User ID
-- Name
-- Professional Goal
-- MBTI
-- Location
-- Compatibility Score
-
-## 🌐 Streamlit Application
-
-The Streamlit application provides:
-
-- Dashboard
-- Existing User recommendations
-- New Profile recommendations
-- Upload Profiles
-- Model Analysis
-- Top 5 recommendations
-- Compatibility scores
-- Accept / Reject feedback
-- Downloadable uploaded-profile recommendations
-- Adaptive-weight visualization
-
-## 🏗️ Application Architecture
-
 ```text
-                 Saved Matching Components
-                           │
-                           ▼
-                    Streamlit App
-                           │
-          ┌────────────────┼────────────────┐
-          ▼                ▼                ▼
-   Existing User      New Profile     Upload Profiles
-          │                │                │
-          └────────────────┼────────────────┘
-                           ▼
-                  Profile Processing
-                           │
-                           ▼
-                 Similarity + MBTI
-                    + Location
-                           │
-                           ▼
-                  Hybrid Score
-                           │
-                           ▼
-                    Top 5 Matches
-                           │
-                           ▼
-                  User Feedback
+User ID
+Name
+Professional Goal
+MBTI
+Location
+Text Similarity
+MBTI Compatibility
+Location Compatibility
+Compatibility Score
 ```
+
+---
+
+## 🌐 9. Streamlit Application
+
+The project includes an interactive Streamlit application.
+
+### Application Navigation
+
+| Page | Purpose |
+|---|---|
+| 🏠 **Dashboard** | System overview and adaptive weights |
+| 👤 **Existing User** | Find compatible users from existing profiles |
+| 🆕 **New Profile** | Create a new profile and find recommendations |
+| 📂 **Upload Profiles** | Upload profile data and generate recommendations |
+| 📊 **Model Analysis** | Inspect model components, weights and dataset |
+
+### Dashboard
+
+The dashboard displays:
+
+- Total profiles
+- Matching method
+- Top-5 recommendation setting
+- Adaptive learning status
+- Current adaptive weights
+- System workflow
+
+### Model Analysis
+
+The Model Analysis page provides:
+
+- Number of profiles
+- TF-IDF feature count
+- Similarity matrix dimensions
+- Adaptive matching weights
+- Matching formula
+- Dataset preview
+
+---
 
 ## 📁 Repository Structure
 
 ```text
-Profile_Based_Matching_System/
+Profile-Based-Matching-System/
 │
-├── notebook/
+├── 📓 notebook/
 │   └── MajorProject1.ipynb
 │
-├── data/
-│   └── README.md
-│
-├── deployment/
+├── 🌐 deployment/
 │   ├── app.py
-│   ├── matching_system.pkl
-│   ├── final_profiles.csv
-│   ├── final_feedback_data.csv
-│   ├── adaptive_weights.csv
-│   ├── top_5_recommendations_U001.csv
 │   └── requirements.txt
 │
-├── results/
+├── 📊 data/
 │   └── README.md
 │
-├── documentation/
-│   ├── Profile_Based_Matching_System_Professional_Report.docx
-│   ├── Profile_Based_Matching_System_1_Page_Summary.pdf
+├── 📈 results/
+│   └── README.md
+│
+├── 📚 documentation/
+│   ├── EXPLANATION_GUIDE.md
+│   ├── Matching_System_Deep_Guide.md
+│   ├── PROJECT_DIRECTORY.md
 │   ├── README_Notebook.md
 │   ├── README_Streamlit.md
-│   ├── Matching_System_Deep_Guide.md
-│   ├── EXPLANATION_GUIDE.md
-│   ├── PROJECT_DIRECTORY.md
-│   └── RUNTIME_ARTIFACTS.md
+│   ├── RUNTIME_ARTIFACTS.md
+│   ├── Profile_Based_Matching_System_Professional_Report.docx
+│   └── Profile_Based_Matching_System_1_Page_Summary.pdf
 │
 ├── .gitignore
+├── GENERATED_PACKAGE_MANIFEST.md
 └── README.md
 ```
 
-> The saved runtime artifacts listed under `deployment/` are produced by the notebook. They are not fabricated by this documentation package. See `documentation/RUNTIME_ARTIFACTS.md`.
+---
 
 ## 📦 Requirements
 
@@ -279,89 +405,206 @@ joblib
 nltk
 ```
 
-## ▶️ Run the Streamlit Application
+---
 
-Open a terminal in the deployment folder:
+## 🚀 Installation
 
-```powershell
-cd deployment
-pip install -r requirements.txt
-python -m streamlit run app.py
+Clone the repository:
+
+```bash
+git clone https://github.com/sayyadsuzain9001/Profile-Based-Matching-System.git
 ```
 
-The application expects the saved project artifacts to be present in the same deployment folder.
+Move into the project:
 
-## 🧪 Notebook Requirements
+```bash
+cd Profile-Based-Matching-System
+```
 
-The notebook uses NLTK for stopword removal and lemmatization.
+Create a virtual environment:
+
+```bash
+python -m venv .venv
+```
+
+Activate it on Windows:
+
+```powershell
+.venv\Scripts\activate
+```
+
+Install dependencies:
+
+```bash
+pip install -r deployment/requirements.txt
+```
+
+---
+
+## 🧠 NLTK Setup
+
+The notebook requires the NLTK resources used for stop-word removal and lemmatization.
 
 Run:
 
 ```python
 import nltk
+
 nltk.download("stopwords")
 nltk.download("wordnet")
 ```
 
-before running the text-preprocessing section if the NLTK resources are not already installed.
+Then run the notebook from beginning to end to generate the runtime model/data artifacts.
 
-## 🧪 Testing Checklist
+---
 
-### Notebook
+## ▶️ Run the Streamlit Application
 
-- [x] User profile generation
-- [x] Dataset inspection
-- [x] Missing-value check
-- [x] Text preprocessing
-- [x] TF-IDF
-- [x] Cosine Similarity
-- [x] MBTI compatibility
-- [x] Location compatibility
-- [x] Hybrid score
-- [x] Top 5 recommendations
-- [x] Feedback generation
-- [x] Logistic Regression adaptive model
-- [x] Adaptive weights
-- [x] Adaptive recommendations
-- [x] Final result saving
-- [x] Streamlit artifact preparation
+After generating the required runtime files, place the model/data artifacts beside `app.py` as required by the application.
 
-### Streamlit
+Then:
 
-- [x] Dashboard
-- [x] Existing User
-- [x] New Profile
-- [x] Upload Profiles
-- [x] Model Analysis
-- [x] Top 5 recommendations
-- [x] Compatibility scores
-- [x] Accept / Reject feedback
-- [x] Download recommendations
+```bash
+cd deployment
+```
 
-## 📌 Project Status
+Install requirements:
+
+```bash
+pip install -r requirements.txt
+```
+
+Run Streamlit:
+
+```bash
+python -m streamlit run app.py
+```
+
+The application will open in your browser.
+
+---
+
+## 💾 Runtime Artifacts
+
+The notebook generates the following important files:
 
 ```text
-Profile Generation          ✅
-NLP Preprocessing           ✅
-TF-IDF                      ✅
-Cosine Similarity           ✅
-MBTI Compatibility          ✅
-Location Compatibility      ✅
-Hybrid Recommendation        ✅
-Feedback Learning            ✅
-Adaptive Weights             ✅
-Top 5 Recommendations        ✅
-Streamlit Application        ✅
-Documentation                ✅
+profiles.csv
+final_profiles.csv
+final_feedback_data.csv
+top_5_recommendations_U001.csv
+adaptive_weights.csv
+matching_system.pkl
 ```
+
+The Streamlit application requires the saved matching components and profile/weight data described in the project documentation.
+
+> The repository documentation does not fabricate runtime artifacts. They should be generated by executing the notebook in an environment where the required NLTK resources are available.
+
+---
+
+## 🛠️ Technology Stack
+
+| Technology | Purpose |
+|---|---|
+| **Python** | Core implementation |
+| **Pandas** | Data handling |
+| **NumPy** | Numerical operations |
+| **NLTK** | Text preprocessing |
+| **Scikit-learn** | TF-IDF, cosine similarity and Logistic Regression |
+| **Joblib** | Saving/loading model components |
+| **Matplotlib** | Visualization |
+| **Streamlit** | Interactive web application |
+
+---
+
+## 📚 Documentation
+
+| Document | Purpose |
+|---|---|
+| `README.md` | Main GitHub project documentation |
+| `README_Notebook.md` | Notebook workflow and section guide |
+| `README_Streamlit.md` | Streamlit application guide |
+| `Matching_System_Deep_Guide.md` | Detailed technical explanation |
+| `EXPLANATION_GUIDE.md` | Simple explanation and viva preparation |
+| `PROJECT_DIRECTORY.md` | Repository structure |
+| `RUNTIME_ARTIFACTS.md` | Runtime files and generation instructions |
+| `Profile_Based_Matching_System_Professional_Report.docx` | Professional project report |
+| `Profile_Based_Matching_System_1_Page_Summary.pdf` | One-page project summary |
+
+---
+
+## ⚠️ Limitations
+
+- The profile dataset is synthetic.
+- The feedback interactions used by the notebook are simulated.
+- MBTI compatibility depends on the predefined compatibility rules.
+- Location compatibility currently uses a simple same/different comparison.
+- The adaptive model depends on the available feedback data.
+- TF-IDF represents lexical/weighted word similarity and does not provide deep contextual understanding like transformer-based language models.
+- Runtime model artifacts must be generated before the Streamlit application can operate.
+
+---
+
+## 🔮 Future Scope
+
+Possible extensions include:
+
+- Transformer-based sentence embeddings.
+- Semantic similarity using modern language models.
+- More detailed geographical distance calculations.
+- Real user feedback collection.
+- Online/incremental recommendation learning.
+- User preference profiles.
+- Explainable recommendation reasons.
+- Larger real-world datasets.
+- Recommendation history and analytics.
+- Cloud deployment and database integration.
+
+---
+
+## 🧪 Project Status
+
+| Component | Status |
+|---|:---:|
+| Profile generation | ✅ |
+| Data inspection | ✅ |
+| Text preprocessing | ✅ |
+| TF-IDF vectorization | ✅ |
+| Cosine similarity | ✅ |
+| MBTI compatibility | ✅ |
+| Location compatibility | ✅ |
+| Hybrid scoring | ✅ |
+| Top-5 recommendations | ✅ |
+| Feedback collection | ✅ |
+| Adaptive learning | ✅ |
+| Adaptive recommendations | ✅ |
+| Streamlit application | ✅ |
+| Project documentation | ✅ |
+
+---
+
+## 📌 Conclusion
+
+The **Profile-Based Matching System** demonstrates an end-to-end hybrid recommendation workflow that combines NLP-based profile similarity with MBTI personality compatibility and location matching.
+
+The system goes beyond a fixed scoring formula by introducing **feedback-driven adaptive learning** using Logistic Regression. The resulting recommendation workflow can generate ranked Top-5 matches and expose the matching process through an interactive Streamlit application.
+
+---
 
 ## 👨‍💻 Author
 
-**Suzain Mudabbir Sayyad**  
-Artificial Intelligence & Machine Learning Student
+### Suzain Mudabbir Sayyad
 
-## ⭐ Keywords
+**Artificial Intelligence & Machine Learning Student**  
+Sanjay Ghodawat University, Kolhapur
 
-`Python` `Machine Learning` `NLP` `TF-IDF` `Cosine Similarity` `Recommendation System` `MBTI` `Adaptive Learning` `Logistic Regression` `Streamlit`
-#   P r o f i l e - B a s e d - M a t c h i n g - S y s t e m  
- 
+---
+
+## 🔑 Keywords
+
+`Machine Learning` `Recommendation System` `NLP` `TF-IDF` `Cosine Similarity` `MBTI` `Hybrid Recommendation` `Adaptive Learning` `Logistic Regression` `Python` `Streamlit`
+
+---
+
+⭐ **Profile-Based Matching System — Intelligent Hybrid Recommendation using NLP and Adaptive Feedback**
